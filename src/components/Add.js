@@ -15,7 +15,7 @@ export const Add = ({ setMovies }) => {
             description: description.value
         }
 
-        setMovies(items => {
+        setMovies((items) => {
             if (Array.isArray(items)) {
                 return [
                     newMovie,
@@ -24,19 +24,20 @@ export const Add = ({ setMovies }) => {
             } else {
                 setMovies(newMovie)
             }
+        })
 
-            SaveOnStorage("movies", newMovie)
+        SaveOnStorage("movies", newMovie)
 
-        }
+    }
 
     return (
-            <div className="add">
-                <h3 className="title">{title}</h3>
-                <form onSubmit={handleSubmit}>
-                    <input type="text" id="title" name="title" placeholder="Titulo" />
-                    <textarea id="description" name="description" placeholder="Descripción"></textarea>
-                    <input type="submit" id="save" value="Guardar" />
-                </form>
-            </div>
-        )
-    }
+        <div className="add">
+            <h3 className="title">{title}</h3>
+            <form onSubmit={handleSubmit}>
+                <input type="text" id="title" name="title" placeholder="Titulo" />
+                <textarea id="description" name="description" placeholder="Descripción"></textarea>
+                <input type="submit" id="save" value="Guardar" />
+            </form>
+        </div>
+    )
+}
