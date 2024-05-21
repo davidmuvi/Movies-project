@@ -22,7 +22,7 @@ export const Add = ({ setMovies }) => {
                     ...items
                 ]
             } else {
-                setMovies(newMovie)
+                setMovies([newMovie])
             }
         })
 
