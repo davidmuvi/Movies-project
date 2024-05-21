@@ -1,13 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { SaveOnStorage } from '../helpers/SaveOnStorage'
 
 export const Add = ({ setMovies }) => {
 
     const title = "Añadir pelicula"
-    const [movie, setMovie] = useState({
-        title: '',
-        description: ''
-    })
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -19,27 +15,28 @@ export const Add = ({ setMovies }) => {
             description: description.value
         }
 
-        setMovie(newMovie)
-
         setMovies(items => {
-            return [
-                ...items,
-                newMovie
-            ]
-        })
+            if (Array.isArray(items)) {
+                return [
+                    newMovie,
+                    ...items
+                ]
+            } else {
+                setMovies(newMovie)
+            }
 
-        SaveOnStorage("movies", newMovie)
+            SaveOnStorage("movies", newMovie)
 
-    }
+        }
 
     return (
-        <div className="add">
-            <h3 className="title">{title}</h3>
-            <form onSubmit={handleSubmit}>
-                <input type="text" id="title" name="title" placeholder="Titulo" />
-                <textarea id="description" name="description" placeholder="Descripción"></textarea>
-                <input type="submit" id="save" value="Guardar" />
-            </form>
-        </div>
-    )
-}
+            <div className="add">
+                <h3 className="title">{title}</h3>
+                <form onSubmit={handleSubmit}>
+                    <input type="text" id="title" name="title" placeholder="Titulo" />
+                    <textarea id="description" name="description" placeholder="Descripción"></textarea>
+                    <input type="submit" id="save" value="Guardar" />
+                </form>
+            </div>
+        )
+    }
